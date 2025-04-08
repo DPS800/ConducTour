@@ -117,7 +117,7 @@ function handleSubmit(event) {
         alert("Write something!");
     } else {
         $("#output").prepend("<br />");
-        $("#output").prepend("[🙂] " + text);
+        $("#output").prepend("[😁] " + text);
         $("#query").val("");
 
         $("#submit").prop("disabled", true);
@@ -156,7 +156,7 @@ function handleSubmit(event) {
                 var reply = response.choices[0].message.content;
 
                 $("#output").prepend("<br />");
-                $("#output").prepend("[🪙] " + reply);
+                $("#output").prepend("[🐦] " + reply);
 
                 const apiKey = document.getElementById('api-key-input').value;
                 const voiceId = document.getElementById('voice-id-input').value;

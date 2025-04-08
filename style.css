@@ -45,3 +45,18 @@ body {
 #chatbotUI,#langUI {
     display: none; /* Hide the chatbotUI by default */
 }
+
+a-scene {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 0; /* Ensure it is behind the UI */
+}
+
+.container {
+    /* position: relative; */
+    z-index: 1;
+    pointer-events: auto;
+}
