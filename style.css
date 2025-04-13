@@ -4,7 +4,7 @@
     touch-action: manipulation;
 }
 
-document.ondblclick = function (e) {
+document.ondblclick=function (e) {
     e.preventDefault();
 }
 
@@ -27,13 +27,40 @@ body {
     width: 80px;
     overflow: hidden;
     font-size: small;
-    border-radius: 100%;
+    border-radius: 100% !important;
 }
 
 .chatbotButton {
     position: absolute;
-    right: 0;
+    left: 0;
     bottom: 0;
+    font-size: x-small !important;
+}
+
+.chatOutput {
+    height: 100px !important;
+    scroll-behavior: smooth;
+    overflow: auto;
+    overflow-y: scroll;
+    scrollbar-color: #007bff #f4f4f4; /* Thumb color and track color */
+    scrollbar-width: thin; /* Thin scrollbar */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on mobile */
+}
+
+.chatOutput::-webkit-scrollbar {
+    width: 8px; /* Adjust scrollbar width */
+    height: 8px; /* Adjust scrollbar height */
+}
+
+.chatOutput::-webkit-scrollbar-thumb {
+    background-color: #007bff; /* Change to your desired color */
+    border-radius: 10px; /* Rounded corners */
+    border: 2px solid #ffffff; /* Optional: Add a border for contrast */
+}
+
+.chatOutput::-webkit-scrollbar-track {
+    background-color: #f4f4f4; /* Change to your desired track color */
+    border-radius: 10px; /* Rounded corners */
 }
 
 .langButton {
@@ -42,8 +69,30 @@ body {
     top: 0;
 }
 
-#chatbotUI,#langUI {
+#chatbotUI,
+#langUI {
     display: none; /* Hide the chatbotUI by default */
+}
+
+.container {
+    /* position: relative; */
+    z-index: 1;
+    pointer-events: auto;
+}
+
+.popup {
+    position: fixed; /* Position relative to the viewport */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -70%); /* Adjust for the element's size */
+    padding: 10px; /* Add padding for content */
+    width: 90%; /* Ensure it fits on smaller screens */
+    max-width: 400px; /* Limit the maximum width */
+    background-color: rgb(247, 247, 247) !important; /* Grey background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    z-index: 1000; /* Ensure it appears above other elements */
+    text-align: center; /* Center the text inside the popup */
 }
 
 a-scene {
@@ -55,8 +104,26 @@ a-scene {
     z-index: 0; /* Ensure it is behind the UI */
 }
 
-.container {
-    /* position: relative; */
-    z-index: 1;
-    pointer-events: auto;
+/* Show the scrollbar */
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+    width: 12px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ffffff;
 }

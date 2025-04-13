@@ -1,5 +1,13 @@
 $(document).on("click", "#chatbotButton", function () {
     $("#chatbotUI").toggle(); // Toggles the visibility of the chatbotUI div
+    $("#chatbotChatButton").toggle(); // Toggles the invisibility of the chatbotChatButton button
+    $("elevenlabs-convai").toggle(); // Toggles the invisibility of the ElevenLabs widget
+});
+
+$(document).on("click", "#chatbotChatButton", function () {
+    $("#chatbotUI").toggle(); // Toggles the visibility of the chatbotUI div
+    $("#chatbotChatButton").toggle(); // Toggles the visibility of the chatbotChatButton button
+    $("elevenlabs-convai").toggle(); // Toggles the visibility of the ElevenLabs widget
 });
 
 $(document).on("click", "#langButton", function () {
@@ -116,9 +124,18 @@ function handleSubmit(event) {
     if (text === "") {
         alert("Write something!");
     } else {
-        $("#output").prepend("<br />");
-        $("#output").prepend("[😁] " + text);
-        $("#query").val("");
+        $("#output").prepend("<br />"); // Add a line break for spacing
+
+        // Create an image element for the emoji using profile_icon_emoji.png
+        const profileIconEmoji = $("<img>")
+            .attr("src", "profile_icon_emoji.png") // Replace with the actual path to your emoji image
+            .attr("alt", "😁") // Set the alt text to the emoji
+            .css({ width: "26px", height: "24px", "vertical-align": "middle" }); // Optional: Style the image
+
+        // Prepend the text and then the image to the #output
+        $("#output").prepend("] " + text).prepend(profileIconEmoji).prepend("["); // Add the image before the text
+
+        $("#query").val(""); // Clear the input field
 
         $("#submit").prop("disabled", true);
         $("#submit").text("Loading ...");
@@ -135,7 +152,8 @@ function handleSubmit(event) {
                 'messages': [
                     {
                         'role': 'system',
-                        'content': `You are my expert advisor specialized in the George Brown College School of Design. Respond only in ${lang}. If the language is unclear, respond in English. Keep the response to one or two sentences max.`},
+                        'content': `You are my expert advisor specialized in the George Brown College School of Design. Respond only in the language the message you receive from the user is in, or if they explicitly asks you to speak a certain language. If the language is unclear, respond in English. Keep the response to one or two sentences max.`
+                    },
                     {
                         'role': 'user',
                         'content': text
@@ -150,18 +168,26 @@ function handleSubmit(event) {
             console.log("AJAX request successful. Response:", response);
 
             $("#submit").prop("disabled", false);
-            $("#submit").text("Submit");
+            $("#submit").text("➤ SEND");
 
             if (response && response.choices && response.choices[0] && response.choices[0].message) {
                 var reply = response.choices[0].message.content;
 
-                $("#output").prepend("<br />");
-                $("#output").prepend("[🐦] " + reply);
+                $("#output").prepend("<br />"); // Add a line break for spacing
+
+                // Create an image element for the emoji using navit_emoji.png
+                const navitEmoji = $("<img>")
+                    .attr("src", "navit_emoji.png") // Replace with the actual path to your emoji image
+                    .attr("alt", "🐦") // Set the alt text to the emoji
+                    .css({ width: "26px", height: "24px", "vertical-align": "middle" }); // Optional: Style the image
+
+                // Prepend the reply text and then the image to the #output
+                $("#output").prepend("] " + reply).prepend(navitEmoji).prepend("["); // Add the image before the reply text
 
                 const apiKey = document.getElementById('api-key-input').value;
                 const voiceId = document.getElementById('voice-id-input').value;
 
-                getElevenLabsSpeech(reply, apiKey, voiceId, function(audioUrl) {
+                getElevenLabsSpeech(reply, apiKey, voiceId, function (audioUrl) {
                     playAudio(audioUrl);
                 });
 
@@ -176,7 +202,7 @@ function handleSubmit(event) {
 
             alert("Failed to get a response. Please try again.");
             $("#submit").prop("disabled", false);
-            $("#submit").text("Submit");
+            $("#submit").text("➤ SEND");
         });
     }
 }
@@ -185,4 +211,4 @@ function languageSet() {
     var lang = document.getElementById("lang").value;
 }
 
-javascript:document.querySelectorAll("*").forEach(e=>{e.style["touch-action"]="manipulation"}),new MutationObserver(e=>{e.forEach(function(e){for(var o=0;o<e.addedNodes.length;o++)e.addedNodes[o].style["touch-action"]="manipulation"})}).observe(document.body,{childList:!0,subtree:!0});
+javascript: document.querySelectorAll("*").forEach(e => { e.style["touch-action"] = "manipulation" }), new MutationObserver(e => { e.forEach(function (e) { for (var o = 0; o < e.addedNodes.length; o++)e.addedNodes[o].style["touch-action"] = "manipulation" }) }).observe(document.body, { childList: !0, subtree: !0 });

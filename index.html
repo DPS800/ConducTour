@@ -25,25 +25,10 @@
     <!-- ELEVENLABS -->
     <script src="ElevenLabsClient.js"></script>
 
-    <!-- ANNYANG
-    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
-    <script>
-        if (annyang) {
-            // Let's define a command.
-            const commands = {
-                'hello': () => { alert('Hello world!'); }
-            };
-
-            // Add our commands to annyang
-            annyang.addCommands(commands);
-
-            // Start listening.
-            annyang.start();
-        }
-    </script> -->
-
+    <!-- ELEVENLABS CONVAI WIDGET -->
     <elevenlabs-convai agent-id="PUounLJJXvyI5FVQJL5I"></elevenlabs-convai>
     <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+
     <!-- AR.js by @jerome_etienne - github: https://github.com/jeromeetienne/ar.js - info: https://medium.com/arjs/augmented-reality-in-10-lines-of-html-4e193ea9fdbf -->
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
@@ -52,22 +37,22 @@
 <body style='margin : 0px; overflow: hidden;'>
 
     <!-- AR model -->
-    <a-assets>
+    <!-- <a-assets>
         <a-asset-item id="avocado" src="Avocado.glb"></a-asset-item>
     </a-assets>
 
     <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
         <a-entity gltf-model="#avocado" position="0 0 0" scale="30 30 15"></a-entity>
         <a-marker-camera preset='hiro'></a-marker-camera>
-    </a-scene>
+    </a-scene> -->
 
     <!-- Chatbot ui -->
-    <div class="container">
+    <div class="container fixed-bottom">
         <div class="row">
-            <div class="col-12 py-5">
+            <div class="col-12 mx-auto fixed-bottom">
 
                 <!-- Language button -->
-                <button class="button langButton" id="langButton">LANGUAGE</button>
+                <!-- <button class="button langButton" id="langButton">LANGUAGE</button>
 
                 <div class="col-1" id="langUI">
                     <button class="btn btn-secondary d-block mt-2 mb-4 " id="english">
@@ -79,23 +64,37 @@
                     <button class="btn btn-secondary d-block mt-2 mb-4" id="spanish">
                         Spanish
                     </button>
+                </div> -->
+
+                <!-- Heads up popup -->
+                <div class="col-12 container text-center" id="popup">
+                    <div class="alert fade show popup" role="alert">
+                        <h4 class="alert-heading">Heads up!<br></h4> ConducTour requires your CAMERA and MICROPHONE permissions enabled to work!<br></br>Do you want the lines of the tour to be spoken out load or not?<br></br>
+                        <button type="button" class="btn btn-info" data-bs-dismiss="alert" aria-label="Close">Sound On</button>
+                        - or -
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="alert" aria-label="Close">Sound Off</button>
+                    </div>
                 </div>
 
                 <!-- Chatbot button -->
-                <button class="button chatbotButton" id="chatbotButton">CHATBOT</button>
+                <button class="btn btn-secondary button chatbotButton fixed-bottom text-center"
+                    id="chatbotChatButton">💬 CHATBOT CHAT</button>
 
-                <div id="chatbotUI">
+                <div id="chatbotUI" class="chatbotUI col-12 float-bottom">
                     <input type="text" placeholder="Ask me any question about the GBC..." class="form-control"
                         id="query" />
 
-                    <button class="btn btn-outline-info w-100 d-block mt-3 mb-0" id="speak">
+                    <!-- <button class="btn btn-outline-info w-100 d-block mt-3 mb-0" id="speak">
                         Speak
+                    </button> -->
+                    <button class="btn btn-primary w-100 d-block mt-1" id="submit">
+                        ➤ SEND
                     </button>
-                    <button class="btn btn-primary w-100 d-block mt-2 mb-4" id="submit">
-                        Submit
+                    <button class="btn btn-secondary w-100 d-block mt-1 mb-1" id="chatbotButton">
+                        📞 CHATBOT CALL
                     </button>
 
-                    <div id="output" class="p-3 bg-light border">
+                    <div id="output" class="p-3 bg-light border chatOutput">
                     </div>
                 </div>
 
