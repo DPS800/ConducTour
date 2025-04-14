@@ -9,7 +9,7 @@ document.ondblclick=function (e) {
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif !important;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
@@ -20,6 +20,7 @@ body {
     color: #333;
     height: 100%;
     overflow: hidden;
+    
 }
 
 .button {
@@ -30,11 +31,16 @@ body {
     border-radius: 100% !important;
 }
 
+.btn {
+    font-size: 14px !important;
+}
+
 .chatbotButton {
     position: absolute;
     left: 0;
     bottom: 0;
-    font-size: x-small !important;
+    font-size: 12px !important;
+    border-width: 0px !important;
 }
 
 .chatOutput {
@@ -45,6 +51,7 @@ body {
     scrollbar-color: #007bff #f4f4f4; /* Thumb color and track color */
     scrollbar-width: thin; /* Thin scrollbar */
     -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on mobile */
+    border-radius: 10px !important;
 }
 
 .chatOutput::-webkit-scrollbar {
@@ -80,13 +87,29 @@ body {
     pointer-events: auto;
 }
 
+#chatbotUI {
+    position: fixed; /* Position relative to the viewport */
+    bottom: 0%; /* Place it near the bottom of the screen */
+    right: 5%; /* Center it horizontally with some margin */
+    width: 90%; /* Make it take most of the screen width */
+    z-index: 999; /* Ensure it appears above other elements */
+    background-color: #ffffff; /* Background color for the chatbox */
+    overflow: hidden; /* Prevent content overflow */
+}
+
+@media (max-width: 768px) {
+    #chatbotUI {
+        bottom: 1%; /* Place it near the bottom of the screen */
+    }
+}
+
 .popup {
     position: fixed; /* Position relative to the viewport */
     top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
-    transform: translate(-50%, -70%); /* Adjust for the element's size */
-    padding: 10px; /* Add padding for content */
-    width: 90%; /* Ensure it fits on smaller screens */
+    margin-bottom: 40vh !important; /* Adjust for the bottom button */
+    transform: translateX(-50%); /* Center horizontally */
+    width: 100%; /* Ensure it fits on smaller screens */
     max-width: 400px; /* Limit the maximum width */
     background-color: rgb(247, 247, 247) !important; /* Grey background */
     border-radius: 10px; /* Rounded corners */
